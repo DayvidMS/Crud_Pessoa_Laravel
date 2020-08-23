@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ModelCadastro;
 
 class CadastroController extends Controller
 {
+        private $ObjPessoa;
+
+    public function __construct()
+    {
+        $this->ObjPessoa = new ModelCadastro() ;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class CadastroController extends Controller
      */
     public function index()
     {
-        return view("index");
+        $Pessoa=$this->ObjPessoa->all();
+        return view('index',compact('Pessoa'));
     }
 
     /**
@@ -23,7 +33,7 @@ class CadastroController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -34,7 +44,12 @@ class CadastroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->ObjPessoa->create([
+            'Nome'=>$request->Nome,
+            'Telefone'=>$request->Telefone,
+            'Email'=>$request->Email,
+            'id'=>$request->id
+        ]);
     }
 
     /**

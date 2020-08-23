@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'CadastroController@index');
+Route::resource('/Pessoa', 'CadastroController');
